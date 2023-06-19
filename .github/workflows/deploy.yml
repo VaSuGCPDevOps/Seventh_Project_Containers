@@ -11,12 +11,12 @@ jobs:
   test:
     environment: testing
     runs-on: ubuntu-latest
-    container:
-      image: node:18.16.0-alpine
+    #container:
+     # image: node:18.16.0-alpine
     
     env:
       MONGODB_CONNECTION_PROTOCOL: mongodb
-      MONGODB_CLUSTER_ADDRESS: vasumongodb
+      MONGODB_CLUSTER_ADDRESS: 49.37.156.102:27017  #here we are running on runner machine our local ip address should be there to communicate
       MONGODB_USERNAME: root
       MONGODB_PASSWORD: example
       PORT: 8080
@@ -24,6 +24,8 @@ jobs:
     services:
       vasumongodb:
         image: mongo
+        ports:
+          - 27017:27017   # we need to define the port
         env:
           MONGO_INITDB_ROOT_USERNAME: root
           MONGO_INITDB_ROOT_PASSWORD: example
